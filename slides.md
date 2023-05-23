@@ -113,5 +113,3 @@ Wird ein Cart persistiert<!-- .element: class="fragment" data-fragment-index="1"
 - Nachteil: Unerwünschter Datenverlust kann entstehen
 - Vorteile: Integrität der Datenbank gewährleistet
 
----
-
