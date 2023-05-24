@@ -11,7 +11,8 @@
 > Ereignis breitet sich auf eine Reihe von Objekten aus
 >
 > Art & Weise Operationen auf einem Objekt auszuführen
-
+>
+> **ORM** Object-Relational Mapping
 ---
 
 ## Persist
@@ -112,4 +113,57 @@ Wird ein Cart persistiert<!-- .element: class="fragment" data-fragment-index="1"
   - Aus allen Carts mit einer Maus im Warenkorb wird diese gelöscht
 - Nachteil: Unerwünschter Datenverlust kann entstehen
 - Vorteile: Integrität der Datenbank gewährleistet
+
+--
+## User Controller / User Entity erstellt
+---
+## User Controller
+```php
+class UserController extends AbstractController
+{
+    #[Route('/user', name: 'app_user')]
+    public function index(): Response
+    {
+        return $this->render('user/index.html.twig', [
+            'controller_name' => 'UserController',
+        ]);
+    }
+
+    #[Route('/user/register', name: 'app_user_register', methods: ['POST'])]
+    public function register(): Response
+    {
+        return $this->render('user/register.html.twig', [
+            'controller_name' => 'UserController',
+        ]);
+    }
+
+    #[Route('/user/login', name: 'app_user_login', methods: ['POST'])]
+    public function login(): Response {
+        return $this->render('user/login.html.twig', [
+            'controller_name' => 'UserController',
+        ]);
+    }
+}
+```
+---
+## User Entity
+```php
+[ORM\Entity(repositoryClass: UserRepository::class)]
+class User
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $email = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $password = null;
+}
+```
 
